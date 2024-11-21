@@ -381,6 +381,11 @@ function toggleKatakana() {
 
 
 function showNextSymbol() {
+    const symbolElement = document.getElementById("symbol");
+
+    // Удаляем классы подсветки
+    symbolElement.classList.remove("correct", "incorrect");
+
     let newSymbol;
     do {
         newSymbol = symbols[Math.floor(Math.random() * symbols.length)];
@@ -392,7 +397,10 @@ function showNextSymbol() {
     previousSymbols.push(currentSymbol);
     if (previousSymbols.length > 2) previousSymbols.shift();
 
-    document.getElementById("symbol").textContent = currentSymbol.char;
+    // Показываем новый символ
+    symbolElement.textContent = currentSymbol.char;
+
+    // Сбрасываем поле ввода и текст результата
     document.getElementById("result").textContent = "";
     document.getElementById("answer").value = "";
     hintUsed = false; 
