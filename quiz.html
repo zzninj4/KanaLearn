@@ -104,11 +104,13 @@ header p
     width: 500px;
     height: 500px;
     display: flex;
+    gap: 10px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
     margin-top: 90px;
+    outline: 2px solid #f79c34;
 }
 /* ------------------------------------------------------------------- */
 
@@ -127,14 +129,13 @@ header p
 }
 /* ------------------------------------------------------------------- */
 
-/* ------------------------------- поле для ввода ------------------------------------ */
+/* ------------------------------- (input answer) поле для ввода ------------------------------------ */
 #answer 
 {
     width: 300px;
     height: 40px;
-    padding: 10px;
-    margin: 20px auto; 
     display: block;
+    padding: 5px 10px;
     color: #333;
     background-color: #f7f7f7;
     border: 2px solid #ccc;
@@ -159,13 +160,12 @@ header p
 }
 /* ------------------------------------------------------------------- */
 
-/* ---------------------------- кнопка проверки --------------------------------------- */
+/* ---------------------------- (checkanswer) кнопка проверки --------------------------------------- */
 .checkanswer 
 {
     display: block; 
     width: 250px; 
     height: 50px;
-    margin: 10px auto; 
     padding: 10px;
     background: linear-gradient(90deg, #f7b733, #fc4a1a);
     color: #fff; 
@@ -199,6 +199,17 @@ header p
     gap: 10px; 
 }
 
+/* -------- форс мажорчик --------- */
+.control-buttons
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+/* ----------------------------- */
+
 .other-buttons button 
 {
     width: 150px;
@@ -226,6 +237,14 @@ header p
     box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 /* ------------------------------------------------------------------- */
+
+/* ------------------------------ инсульт ------------------------------------- */
+#result
+{
+    font-family: sans-serif;
+    font-size: 18px;
+}
+/* ------------------------------------------------------------------- */
     </style>
 </head>
 <body>
@@ -243,6 +262,7 @@ header p
         <div class="ques"><p>Что за символ?</p></div>
         <div class="card" id="kana-card"></div>
         <input type="text" id="answer" placeholder="и как он пишется?"/>
+        <div class="result" id="result"></div>
         <div class="control-buttons">
             <button class="checkanswer" onclick="checkAnswer()">Проверить</button>
 
@@ -252,7 +272,7 @@ header p
                 <button onclick="showHint()">Подсказка</button>
             </div>
         </div>
-        <div class="result" id="result"></div>
+
     </div>
     
 

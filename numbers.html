@@ -8,162 +8,274 @@
     <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet"/>
     <title>Циферки хехе</title>
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-            text-decoration: none;
-        }
+/* ------------------------------ настройки ------------------------------------- */
+:root
+{
+    --custom-gradient-beta: linear-gradient(150deg, rgba(255,200,0,1) 0%, rgba(0,0,0,1) 30%, rgba(255,200,0,1) 60%, rgba(0,0,0,1) 100%);
+}
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-            min-height: 100vh;
-        }
+* 
+{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
 
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1493515322954-4fa727e97985?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center / cover;
-            filter: blur(5px) brightness(0.3);
-            transform: scale(1.01);
-            z-index: -1;
-        }
+a, h1, h2, h3, h4, p
+{
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-header 
+body
+{
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/* ------------------------------------------------------------------- */
+
+/* -------------------------- топ меню ----------------------------------------- */
+header
+{
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    background-color: black;
+    color: white;
+}
+
+header a
+{
+    font-size: 64px;
+    font-family: 'Noto Serif JP';
+    color: white;
+}
+
+header p
+{
+    font-family: 'Kalam';
+    font-size: 40px;
+    padding-top: 10px;
+    color: white;
+}
+
+.site-name
+{
+    display: flex;
+    width: auto;
+    height: auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+/* ------------------------------------------------------------------- */
+
+/* ------------------------------- bg картинка ------------------------------------ */
+.background 
 {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100px;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3em;
-    font-family: 'Kalam', cursive;
-    z-index: 1000000000000000;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1493515322954-4fa727e97985?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.3) blur(3px);
+    transform: scale(1.02);
+    z-index: -100;
 }
+/* ------------------------------------------------------------------- */
 
-header h2 
+/* ----------------------------- карточка с контентом -------------------------------------- */
+.card
 {
-    font-family: "Noto Serif JP", serif;
-    font-size: 64px;
-}
-
-header .logo, header h1 
-{
-    font-weight: bold;
-    background: linear-gradient(90deg, #E66465, #9198E5, #E68800);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    transition: background-position 0.3s ease;
-}
-
-header .logo:hover, header h1:hover 
-{
-    animation: GradientAnimation 2s ease infinite;
-}
-
-@keyframes GradientAnimation 
-{
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.card 
-{
+    background-color: white;
+    width: 500px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid white;
-    border-radius: 30px;
-    margin-top: 10%;
-    padding: 20px 10px;
-    background: rgba(255, 255, 255, 0.1); 
-    backdrop-filter: blur(10px); 
-    box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.45);
+    justify-content: center;
+    border-radius: 10px;
+    margin-top: 90px;
+    outline: 2px solid blue;
 }
+/* ------------------------------------------------------------------- */
 
-.card h1 
+/* ---------------------------- Рандомное число --------------------------------------- */
+#random-number
 {
-    color: white;
-    padding-bottom: 15px;
+    font-size: 25px;
+    text-align: center;
+    margin: 10px 0;
 }
+/* ------------------------------------------------------------------- */
 
-input 
+/* ---------------------------- input answer --------------------------------------- */
+#answer 
 {
-    margin: 5px;
-    padding: 8px;
+    width: 300px;
+    height: 40px;
+    display: block;
+    padding: 5px 10px;
+    color: #333;
+    background-color: #f7f7f7;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
     font-size: 16px;
-    border: 2px solid black;
-    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
-input.correct 
+#answer:focus 
 {
-    border-color: green;
-    box-shadow: 0 0 20px green;
+    border-color: blue;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-input.incorrect 
+#answer::placeholder 
 {
-    border-color: red;
-    box-shadow: 0 0 20px red;
+    color: #aaa;
+    font-style: italic;
+}
+/* ------------------------------------------------------------------- */
+
+/* ----------------------------- блок с мин-макс значениями -------------------------------------- */
+.min-max-val 
+{
+    display: flex;
+    align-items: center;
+    width: 325px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-button 
+.min-max-val label 
 {
-    margin: 5px;
-    padding: 10px 15px;
+    font-size: 16px; 
+    font-family: 'Arial', sans-serif;
+}
+
+.min-max-val input[type="number"] 
+{
+    width: 180px; 
+    height: 30px;
+    padding: 5px; 
     font-size: 16px;
-    border: 2px solid black;
+    font-family: 'Arial', sans-serif; 
+    border: 1px solid #ccc; 
     border-radius: 5px;
-    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    transition: border-color 0.3s ease;
 }
 
-.some-value 
+.min-max-val input[type="number"]:focus 
 {
-    width: 230px;
+    border-color: #007bff; 
+    outline: none; 
+}
+
+/* ------------------------------------------------------------------- */
+
+/* ---------------------------- контейнер min-val --------------------------------------- */
+.min-val
+{
+    display: flex;
     text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
+/* ------------------------------------------------------------------- */
 
-#random-number 
+/* ---------------------------- контейнер max val --------------------------------------- */
+.max-val
 {
-    font-size: 20px;
-    color: white;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+/* ------------------------------------------------------------------- */
+
+/* ---------------------------- доп. кнопки --------------------------------------- */
+.control-buttons
+{
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 10px; 
+    margin-top: 20px;
 }
 
-#min-value, #max-value 
+.control-buttons button
 {
     width: 150px;
+    height: 40px;
+    background: linear-gradient(120deg, rgba(62,130,255,1) 0%, rgba(26,55,108,1) 100%);
+    color: #fff; 
+    border: none; 
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
-.min-val, .max-val 
+.control-buttons button:hover 
 {
-    color: white;
+    background: linear-gradient(120deg, rgba(51,105,205,1) 0%, rgba(15,31,61,1) 100%);
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
 }
+
+.control-buttons button:active 
+{
+    background: #17305e; 
+    box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+/* ------------------------------------------------------------------- */
+
+/* ---------------------------- инзульд --------------------------------------- */
+#result-message
+{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 8px;
+}
+/* ------------------------------------------------------------------- */
+
+/* ---------------------------- раздел --------------------------------------- */
+
+/* ------------------------------------------------------------------- */
+
+/* ---------------------------- раздел --------------------------------------- */
+
+/* ------------------------------------------------------------------- */
     </style>
 </head>
 <body>
 
+    <div class="background"></div>
+
     <header>
-        <a href="index.html">
-            <h2 class="logo">ラ</h2>
-        </a>
-        <h1>Hiragana & Katakana learn</h1>
+        <div class="site-name">
+            <a href="index.html">ラ</a>
+            <p>KanaLearn</p>
+        </div>
     </header>
 
     <div class="card">
@@ -174,7 +286,7 @@ button
             <input type="text" id="answer" placeholder="Твой ответ ...">
         </div>
 
-        <div id="result-message" style="margin-top: 10px; font-size: 16px; font-weight: bold; color: white;"></div>
+        <div id="result-message"></div>
 
         <div class="min-max-val">
             <div class="min-val">
@@ -190,7 +302,7 @@ button
 
         <div class="control-buttons">
             <button id="clear-button">Очистить поле</button>
-            <button id="next-button">Следующее число</button>
+            <button id="next-button">Дальше</button>
             <button id="check-button">Проверить</button>
         </div>
     </div>
