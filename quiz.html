@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP:200,300,regular,500,600,700,800,900" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet"/>
+    <title>Hiragana \ Katakana Quiz</title>
+    <style>
+/* ------------------------------ настройки ------------------------------------- */
+:root 
+{
+    --custom-gradient-beta: linear-gradient(150deg, rgba(255,200,0,1) 0%, rgba(0,0,0,1) 30%, rgba(255,200,0,1) 60%, rgba(0,0,0,1) 100%);
+}
+
+* 
+{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+a, h1, h2, h3, h4, p 
+{
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body 
+{
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/* ------------------------------------------------------------------- */
+
+/* -------------------------- топ меню ----------------------------------------- */
+header 
+{
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    background-color: black;
+    color: white;
+}
+
+header a 
+{
+    font-size: 64px;
+    font-family: 'Noto Serif JP';
+    color: white;
+}
+
+header p 
+{
+    font-family: 'Kalam';
+    font-size: 40px;
+    padding-top: 10px;
+    color: white;
+}
+
+.site-name 
+{
+    display: flex;
+    width: auto;
+    height: auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+/* ------------------------------------------------------------------- */
+
+/* ------------------------------- bg картинка ------------------------------------ */
+.background
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1544808208-727498b3df07?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.3) blur(3px);
+    transform: scale(1.02);
+    z-index: -100;
+}
+/* ------------------------------------------------------------------- */
+
+/* -------------------------------- карточка с содержимым ----------------------------------- */
+
+.card-container
+{
+    background-color: white;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-top: 90px;
+}
+/* ------------------------------------------------------------------- */
+
+/* ------------------------------ вопрос (?)------------------------------------- */
+.ques p
+{
+    font-size: 38px;
+}
+/* ------------------------------------------------------------------- */
+
+/* --------------------------- отображаемый символ каны ---------------------------------------- */
+#kana-card
+{
+    font-size: 90px;
+    font-family: 'Noto Serif JP';
+}
+/* ------------------------------------------------------------------- */
+
+/* ------------------------------- поле для ввода ------------------------------------ */
+#answer 
+{
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    margin: 20px auto; 
+    display: block;
+    color: #333;
+    background-color: #f7f7f7;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#answer:focus 
+{
+    border-color: #f7b733;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#answer::placeholder 
+{
+    color: #aaa;
+    font-style: italic;
+}
+/* ------------------------------------------------------------------- */
+
+/* ---------------------------- кнопка проверки --------------------------------------- */
+.checkanswer 
+{
+    display: block; 
+    width: 250px; 
+    height: 50px;
+    margin: 10px auto; 
+    padding: 10px;
+    background: linear-gradient(90deg, #f7b733, #fc4a1a);
+    color: #fff; 
+    border: none;
+    border-radius: 8px; 
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.checkanswer:hover 
+{
+    background: linear-gradient(90deg, #f5a623, #f24000);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.checkanswer:active 
+{
+    background: linear-gradient(90deg, #d98c1c, #e63d00);
+    box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2); 
+}
+/* --------------------------- доп кнопки ---------------------------------------- */
+.other-buttons 
+{
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 10px; 
+}
+
+.other-buttons button 
+{
+    width: 150px;
+    height: 40px;
+    background: linear-gradient(90deg, #f7b733, #fc4a1a);
+    color: #fff; 
+    border: none; 
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.other-buttons button:hover 
+{
+    background: linear-gradient(90deg, #f5a623, #f24000); 
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+}
+
+.other-buttons button:active 
+{
+    background: linear-gradient(90deg, #d98c1c, #e63d00); 
+    box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+/* ------------------------------------------------------------------- */
+    </style>
+</head>
+<body>
+
+    <div class="background"></div>
+
+    <header>
+        <div class="site-name">
+            <a href="index.html">ラ</a>
+            <p>KanaLearn</p>
+        </div>
+    </header>
+
+    <div class="card-container">
+        <div class="ques"><p>Что за символ?</p></div>
+        <div class="card" id="kana-card"></div>
+        <input type="text" id="answer" placeholder="и как он пишется?"/>
+        <div class="control-buttons">
+            <button class="checkanswer" onclick="checkAnswer()">Проверить</button>
+
+            <div class="other-buttons">
+                <button id="next-btn" onclick="showNextCharacter()">Дальше</button>
+                <button id="toggle-kana-btn" onclick="toggleKana()">Катакана</button>
+                <button onclick="showHint()">Подсказка</button>
+            </div>
+        </div>
+        <div class="result" id="result"></div>
+    </div>
+    
+
+    <script>
+        const hiragana = [
+    { char: 'あ', romaji: 'a' }, { char: 'い', romaji: 'i' }, { char: 'う', romaji: 'u' },
+    { char: 'え', romaji: 'e' }, { char: 'お', romaji: 'o' },
+    { char: 'か', romaji: 'ka' }, { char: 'き', romaji: 'ki' }, { char: 'く', romaji: 'ku' },
+    { char: 'け', romaji: 'ke' }, { char: 'こ', romaji: 'ko' },
+    { char: 'さ', romaji: 'sa' }, { char: 'し', romaji: 'shi' }, { char: 'す', romaji: 'su' },
+    { char: 'せ', romaji: 'se' }, { char: 'そ', romaji: 'so' },
+    { char: 'た', romaji: 'ta' }, { char: 'ち', romaji: 'chi' }, { char: 'つ', romaji: 'tsu' },
+    { char: 'て', romaji: 'te' }, { char: 'と', romaji: 'to' },
+    { char: 'な', romaji: 'na' }, { char: 'に', romaji: 'ni' }, { char: 'ぬ', romaji: 'nu' },
+    { char: 'ね', romaji: 'ne' }, { char: 'の', romaji: 'no' },
+    { char: 'は', romaji: 'ha' }, { char: 'ひ', romaji: 'hi' }, { char: 'ふ', romaji: 'fu' },
+    { char: 'へ', romaji: 'he' }, { char: 'ほ', romaji: 'ho' },
+    { char: 'ま', romaji: 'ma' }, { char: 'み', romaji: 'mi' }, { char: 'む', romaji: 'mu' },
+    { char: 'め', romaji: 'me' }, { char: 'も', romaji: 'mo' },
+    { char: 'や', romaji: 'ya' }, { char: 'ゆ', romaji: 'yu' }, { char: 'よ', romaji: 'yo' },
+    { char: 'ら', romaji: 'ra' }, { char: 'り', romaji: 'ri' }, { char: 'る', romaji: 'ru' },
+    { char: 'れ', romaji: 're' }, { char: 'ろ', romaji: 'ro' },
+    { char: 'わ', romaji: 'wa' }, { char: 'を', romaji: 'wo' }, { char: 'ん', romaji: 'n' }
+];
+
+const katakana = [
+    { char: 'ア', romaji: 'a' }, { char: 'イ', romaji: 'i' }, { char: 'ウ', romaji: 'u' },
+    { char: 'エ', romaji: 'e' }, { char: 'オ', romaji: 'o' },
+    { char: 'カ', romaji: 'ka' }, { char: 'キ', romaji: 'ki' }, { char: 'ク', romaji: 'ku' },
+    { char: 'ケ', romaji: 'ke' }, { char: 'コ', romaji: 'ko' },
+    { char: 'サ', romaji: 'sa' }, { char: 'シ', romaji: 'shi' }, { char: 'ス', romaji: 'su' },
+    { char: 'セ', romaji: 'se' }, { char: 'ソ', romaji: 'so' },
+    { char: 'タ', romaji: 'ta' }, { char: 'チ', romaji: 'chi' }, { char: 'ツ', romaji: 'tsu' },
+    { char: 'テ', romaji: 'te' }, { char: 'ト', romaji: 'to' },
+    { char: 'ナ', romaji: 'na' }, { char: 'ニ', romaji: 'ni' }, { char: 'ヌ', romaji: 'nu' },
+    { char: 'ネ', romaji: 'ne' }, { char: 'ノ', romaji: 'no' },
+    { char: 'ハ', romaji: 'ha' }, { char: 'ヒ', romaji: 'hi' }, { char: 'フ', romaji: 'fu' },
+    { char: 'ヘ', romaji: 'he' }, { char: 'ホ', romaji: 'ho' },
+    { char: 'マ', romaji: 'ma' }, { char: 'ミ', romaji: 'mi' }, { char: 'ム', romaji: 'mu' },
+    { char: 'メ', romaji: 'me' }, { char: 'モ', romaji: 'mo' },
+    { char: 'ヤ', romaji: 'ya' }, { char: 'ユ', romaji: 'yu' }, { char: 'ヨ', romaji: 'yo' },
+    { char: 'ラ', romaji: 'ra' }, { char: 'リ', romaji: 'ri' }, { char: 'ル', romaji: 'ru' },
+    { char: 'レ', romaji: 're' }, { char: 'ロ', romaji: 'ro' },
+    { char: 'ワ', romaji: 'wa' }, { char: 'ヲ', romaji: 'wo' }, { char: 'ン', romaji: 'n' }
+];
+
+let currentKanaSet = hiragana;
+let currentCharacter;
+let previousCharacter = null;
+let isHiragana = true;
+let hintShown = false;
+
+function getRandomKana() {
+    let newCharacter;
+    do {
+        const randomIndex = Math.floor(Math.random() * currentKanaSet.length);
+        newCharacter = currentKanaSet[randomIndex];
+    } while (newCharacter === previousCharacter); 
+    previousCharacter = newCharacter;
+    return newCharacter;
+}
+
+function showNextCharacter() {
+    currentCharacter = getRandomKana();
+    document.getElementById('kana-card').innerText = currentCharacter.char;
+    document.getElementById('answer').value = '';
+    document.getElementById('result').innerText = ''; 
+    document.getElementById('kana-card').style.backgroundColor = ''; 
+    hintShown = false; 
+}
+
+
+function checkAnswer() {
+    const userAnswer = document.getElementById('answer').value.toLowerCase();
+    const resultElement = document.getElementById('result');
+
+    if (userAnswer === currentCharacter.romaji) {
+        resultElement.style.color = 'green';
+        resultElement.innerText = 'Правильно!';
+        document.getElementById('kana-card').style.backgroundColor = 'lightgreen';
+    } else {
+        resultElement.style.color = 'red';
+        resultElement.innerText = `Неправильно! Правильный ответ: ${currentCharacter.romaji}`;
+        document.getElementById('kana-card').style.backgroundColor = 'lightcoral';
+    }
+
+    document.getElementById('answer').value = ''; 
+}
+
+function toggleKana() {
+    isHiragana = !isHiragana;
+    currentKanaSet = isHiragana ? hiragana : katakana;
+    const toggleButton = document.getElementById('toggle-kana-btn');
+    toggleButton.innerText = isHiragana ? 'На катакану' : 'На хирагану';
+    showNextCharacter();
+}
+
+function showHint() {
+    const resultElement = document.getElementById('result');
+    const romaji = currentCharacter.romaji;
+    if (!hintShown) {
+
+        resultElement.innerText = `Подсказка: ${romaji.charAt(0)}`;
+        hintShown = true; 
+
+    }
+}
+
+
+window.onload = function() {
+    showNextCharacter();
+    const toggleButton = document.getElementById('toggle-kana-btn');
+    toggleButton.innerText = isHiragana ? 'На катакану' : 'На хирагану';
+};
+    </script>
+</body>
+</html>

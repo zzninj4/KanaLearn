@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP:200,300,regular,500,600,700,800,900" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet"/>
+    <title>Циферки хехе</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1493515322954-4fa727e97985?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center / cover;
+            filter: blur(5px) brightness(0.3);
+            transform: scale(1.01);
+            z-index: -1;
+        }
+
+header 
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    font-family: 'Kalam', cursive;
+    z-index: 1000000000000000;
+}
+
+header h2 
+{
+    font-family: "Noto Serif JP", serif;
+    font-size: 64px;
+}
+
+header .logo, header h1 
+{
+    font-weight: bold;
+    background: linear-gradient(90deg, #E66465, #9198E5, #E68800);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: background-position 0.3s ease;
+}
+
+header .logo:hover, header h1:hover 
+{
+    animation: GradientAnimation 2s ease infinite;
+}
+
+@keyframes GradientAnimation 
+{
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.card 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 30px;
+    margin-top: 10%;
+    padding: 20px 10px;
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(10px); 
+    box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.45);
+}
+
+.card h1 
+{
+    color: white;
+    padding-bottom: 15px;
+}
+
+input 
+{
+    margin: 5px;
+    padding: 8px;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+input.correct 
+{
+    border-color: green;
+    box-shadow: 0 0 20px green;
+}
+
+input.incorrect 
+{
+    border-color: red;
+    box-shadow: 0 0 20px red;
+}
+
+button 
+{
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.some-value 
+{
+    width: 230px;
+    text-align: center;
+}
+
+#random-number 
+{
+    font-size: 20px;
+    color: white;
+}
+
+#min-value, #max-value 
+{
+    width: 150px;
+}
+
+.min-val, .max-val 
+{
+    color: white;
+}
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html">
+            <h2 class="logo">ラ</h2>
+        </a>
+        <h1>Hiragana & Katakana learn</h1>
+    </header>
+
+    <div class="card">
+        <h1>Введите число на ромадзи</h1>
+
+        <div class="some-value">
+            <p id="random-number"></p>
+            <input type="text" id="answer" placeholder="Твой ответ ...">
+        </div>
+
+        <div id="result-message" style="margin-top: 10px; font-size: 16px; font-weight: bold; color: white;"></div>
+
+        <div class="min-max-val">
+            <div class="min-val">
+                <label for="min-value">Мин. значение:</label>
+                <input type="number" id="min-value" value="0">
+            </div>
+            <div class="max-val">
+                <label for="max-value">Макс. значение:</label>
+                <input type="number" id="max-value" value="10" max="999999999">
+            </div>
+            
+        </div>
+
+        <div class="control-buttons">
+            <button id="clear-button">Очистить поле</button>
+            <button id="next-button">Следующее число</button>
+            <button id="check-button">Проверить</button>
+        </div>
+    </div>
+
+<script>
+function numberToRomaji(number) {
+    const romajiUnits = 
+    {
+        0: ["zero", "rei"],
+        1: ["ichi"],
+        2: ["ni"],
+        3: ["san"],
+        4: ["yon", "shi"],
+        5: ["go"],
+        6: ["roku"],
+        7: ["nana", "shichi"],
+        8: ["hachi"],
+        9: ["kyuu", "ku"]
+    };
+
+const romajiTens = ["", "juu", "nijuu", "sanjuu", "yonjuu", "gojuu", "rokujuu", "nanajuu", "hachijuu", "kyuujuu"];
+
+    if (number === 0) return romajiUnits[0];
+
+    let romaji = [];
+    if (number >= 10000) {
+        const man = Math.floor(number / 10000);
+        romaji.push(...combineRomaji(numberToRomaji(man), ["man"]));
+        number %= 10000;
+    }
+    if (number >= 1000) {
+        const sen = Math.floor(number / 1000);
+        romaji.push(...combineRomaji(sen === 1 ? [""] : numberToRomaji(sen), ["sen"]));
+        number %= 1000;
+    }
+    if (number >= 100) {
+        const hyaku = Math.floor(number / 100);
+        romaji.push(...combineRomaji(hyaku === 1 ? [""] : numberToRomaji(hyaku), ["hyaku"]));
+        number %= 100;
+    }
+    if (number >= 10) {
+        const juu = Math.floor(number / 10);
+        romaji.push(...combineRomaji([romajiTens[juu]], []));
+        number %= 10;
+    }
+    if (number > 0) {
+        romaji.push(...romajiUnits[number]);
+    }
+    return romaji;
+}
+
+
+function combineRomaji(prefixes, suffixes) {
+    const result = [];
+    prefixes.forEach(prefix => {
+        suffixes.forEach(suffix => {
+            result.push(prefix + suffix);
+        });
+    });
+    return result;
+}
+
+    let randomNumber;
+    let previousNumber = null;
+    let randomRomaji;
+
+
+    function generateNewNumber() {
+    const minValue = parseInt(document.getElementById('min-value').value, 10) || 0;
+    const maxValue = parseInt(document.getElementById('max-value').value, 10) || 10;
+
+
+    if (maxValue > 999999999) {
+        alert("Максимальное значение не может быть больше 999999999!");
+        document.getElementById('max-value').value = 999999999;
+        return;
+    }
+
+    if (minValue >= maxValue) {
+        alert("Минимальное значение должно быть меньше максимального!");
+        return;
+    }
+
+    let newNumber;
+    do {
+        newNumber = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
+    } while (newNumber === previousNumber);
+
+    randomNumber = newNumber;
+    previousNumber = randomNumber;
+
+    randomRomaji = numberToRomaji(randomNumber);
+    document.getElementById('random-number').textContent = `Число: ${randomNumber}`;
+    document.getElementById('answer').value = "";
+    const answerField = document.getElementById('answer');
+    answerField.className = "";
+}
+
+generateNewNumber();
+
+document.getElementById('check-button').addEventListener('click', function () {
+    const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
+    const answerField = document.getElementById('answer');
+    const resultMessage = document.getElementById('result-message');
+
+    if (randomRomaji.includes(userAnswer)) {
+        answerField.className = "correct";
+        resultMessage.textContent = "Правильно! Генерируем новое число...";
+        resultMessage.style.color = "green";
+
+
+        setTimeout(() => {
+            resultMessage.textContent = "";
+            generateNewNumber();
+        }, 2000); 
+    } else {
+        answerField.className = "incorrect";
+        resultMessage.textContent = "Неправильно, попробуйте еще раз!";
+        resultMessage.style.color = "red";
+    }
+});
+
+document.getElementById('clear-button').addEventListener('click', function () {
+    const answerField = document.getElementById('answer');
+    answerField.value = "";
+    answerField.className = "";
+});
+
+document.getElementById('next-button').addEventListener('click', function () {
+    generateNewNumber();
+});
+</script>
+</body>
+</html>
