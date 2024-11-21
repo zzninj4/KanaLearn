@@ -126,6 +126,9 @@ header p
 {
     font-size: 90px;
     font-family: 'Noto Serif JP';
+    border-radius: 50%;
+    width: 130px;
+    text-align: center;
 }
 /* ------------------------------------------------------------------- */
 
@@ -245,6 +248,21 @@ header p
     font-size: 18px;
 }
 /* ------------------------------------------------------------------- */
+
+/* ----------------------------- мягкое свечение символа -------------------------------------- */
+#kana-card.correct 
+{
+    -webkit-box-shadow: 0px 0px 30px 10px rgba(0,168,1,0.7); 
+    box-shadow: 0px 0px 30px 10px rgba(0,168,1,0.7);
+    transition: box-shadow 0.3s ease;
+}
+
+#kana-card.incorrect 
+{
+    -webkit-box-shadow: 0px 0px 30px 10px rgba(168,0,0,0.7); 
+    box-shadow: 0px 0px 30px 10px rgba(168,0,0,0.7);
+}
+/* ------------------------------------------------------------------- */
     </style>
 </head>
 <body>
@@ -277,7 +295,7 @@ header p
     
 
     <script>
-        const hiragana = [
+const hiragana = [
     { char: 'あ', romaji: 'a' }, { char: 'い', romaji: 'i' }, { char: 'う', romaji: 'u' },
     { char: 'え', romaji: 'e' }, { char: 'お', romaji: 'o' },
     { char: 'か', romaji: 'ka' }, { char: 'き', romaji: 'ki' }, { char: 'く', romaji: 'ku' },
@@ -337,10 +355,13 @@ function getRandomKana() {
 
 function showNextCharacter() {
     currentCharacter = getRandomKana();
-    document.getElementById('kana-card').innerText = currentCharacter.char;
+    const kanaCard = document.getElementById('kana-card');
+
+    // Сброс текста и подсветки
+    kanaCard.innerText = currentCharacter.char;
+    kanaCard.classList.remove('correct', 'incorrect'); // Убираем классы подсветки
     document.getElementById('answer').value = '';
     document.getElementById('result').innerText = ''; 
-    document.getElementById('kana-card').style.backgroundColor = ''; 
     hintShown = false; 
 }
 
@@ -348,19 +369,25 @@ function showNextCharacter() {
 function checkAnswer() {
     const userAnswer = document.getElementById('answer').value.toLowerCase();
     const resultElement = document.getElementById('result');
+    const kanaCard = document.getElementById('kana-card');
 
     if (userAnswer === currentCharacter.romaji) {
         resultElement.style.color = 'green';
-        resultElement.innerText = 'Правильно!';
-        document.getElementById('kana-card').style.backgroundColor = 'lightgreen';
+        resultElement.innerText = 'Правильно!!! балдеееж';
+        kanaCard.classList.remove('incorrect');
+        kanaCard.classList.add('correct');
+
+        setTimeout(showNextCharacter, 3000);
     } else {
         resultElement.style.color = 'red';
-        resultElement.innerText = `Неправильно! Правильный ответ: ${currentCharacter.romaji}`;
-        document.getElementById('kana-card').style.backgroundColor = 'lightcoral';
+        resultElement.innerText = `Неправильна! Правильный ответ: ${currentCharacter.romaji}`;
+        kanaCard.classList.remove('correct');
+        kanaCard.classList.add('incorrect');
     }
 
-    document.getElementById('answer').value = ''; 
+    document.getElementById('answer').value = '';
 }
+
 
 function toggleKana() {
     isHiragana = !isHiragana;
