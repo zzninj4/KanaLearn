@@ -7,7 +7,6 @@
     <title>Циферки хехе</title>
 </head>
 <body>
-
     <div class="background"></div>
 
     <header>
@@ -40,7 +39,6 @@
             <button id="next-button">Дальше</button>
         </div>
     </div>
-
 <script>
 function numberToRomaji(number) {
     const romajiUnits = { 0: "zero", 1: "ichi", 2: "ni", 3: "san", 4: "yon", 5: "go", 6: "roku", 7: "nana", 8: "hachi", 9: "kyuu" };
@@ -123,7 +121,6 @@ document.getElementById('next-button').addEventListener('click', generateNewNumb
 document.getElementById('reveal-button').addEventListener('click', function () {
     document.getElementById('romaji-output').classList.add('revealed');
 });
-
 
 generateNewNumber();
 </script>
