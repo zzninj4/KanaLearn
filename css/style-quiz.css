@@ -74,6 +74,35 @@ header p
 }
 /* ------------------------------------------------------------------- */
 
+/* ----------------слово и картинка входа на индексе------------------- */
+.auth
+{
+    position: absolute;
+    left: 81%;
+    top: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth a
+{
+    font-family: 'roboto';
+    font-size: 30px;
+}
+
+.auth img
+{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+/* ------------------------------------------------------------------- */
+
 /* ------------------------------- bg картинка ------------------------------------ */
 .background
 {
