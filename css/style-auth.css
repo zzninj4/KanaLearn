@@ -141,7 +141,7 @@ form
 form h2
 {
     font-size: 50px;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
 }
 
 form label
@@ -176,14 +176,23 @@ form button
     cursor: pointer;
     transition: background-position 1.3s ease;
     border-radius: 8px;
-
 }
 
-form button:hover {
+form button:hover 
+{
     background-position: 100% 0;
 }
 
-form button:not(:hover) {
+form button:not(:hover) 
+{
     background-color: black;
+}
+
+#already-go
+{
+    color: black;
+    font-size: 14px;
+    font-family: 'roboto' sans-serif;
+    margin-top: 10px;
 }
 /* ------------------------------------------------------------------- */
