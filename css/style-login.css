@@ -90,14 +90,17 @@ header p
 
 .auth a
 {
-    font-family: 'roboto';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto';
     font-size: 30px;
 }
 
 .auth img
 {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     display: flex;
     flex-direction: row;
     align-items: center;
