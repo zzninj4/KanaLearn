@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style-register.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="background"></div>
+    
+    <header>
+        <div class="site-name">
+            <a href="index.html">ラ</a>
+            <p>KanaLearn</p>
+        </div>
+
+        <div class="auth">
+            <a href=""><img src="./icons/login.svg" alt="Login"></a>
+            <a href="auth.html">вход</a>
+        </div>
+    </header>
+
+    <div class="auth-card">
+        <form action="" method="post">
+            <h2>Регистрация</h2>
+
+            <label for="login">Логин:</label>
+            <input type="text" id="login" name="login">
+
+            <label for="email">Почта:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Далее</button>
+
+            <p>Уже зареган? тогда - <a href="/login.html" id="already-go">войти</a></p>
+        </form>
+    </div>
+</body>
+</html>
