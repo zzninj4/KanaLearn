@@ -3,7 +3,6 @@ const database = [
 ]
 
 const express = require('express')
-
 const app = express()
 const cors = require('cors')
 
@@ -20,6 +19,4 @@ app.post('/register', (request, response) =>{
 });
 
 
-app.listen(3000)
-
-
+app.listen(900)
